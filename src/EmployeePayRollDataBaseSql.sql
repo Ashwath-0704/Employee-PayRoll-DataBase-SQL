@@ -114,5 +114,4 @@ mysql> SELECT * FROM employee_payroll WHERE start_date between CAST('2022-01-12'
 |  2 | Gouthum | 2022-01-12 |   3000 |
 |  3 | Anusha  | 2022-01-12 |   5000 |
 +----+---------+------------+--------+
-3 rows in set (0.00 sec)
-
+3 rows in set (0.00 sec).
