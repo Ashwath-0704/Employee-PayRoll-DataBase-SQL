@@ -233,6 +233,8 @@ mysql> SELECT COUNT(gender) FROM employee_payroll WHERE gender = 'M' GROUP BY ge
 
 -- UC8 :- Ability to extend employee_payroll data to store employee information like employee phone, address and department
 
+-- UC9 :- Ability to extend employee_payroll table to have Basic Pay, Deductions, Taxable Pay, Income Tax, Net Pay
+
 mysql> INSERT INTO employee_payroll
     ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
     ->        VALUES
