@@ -82,3 +82,15 @@ Query OK, 1 row affected (0.01 sec)
 
 mysql> INSERT INTO employee_payroll (id,name,start_date,salary) values(3,'Anusha','2022-1-12',5000);
 Query OK, 1 row affected (0.01 sec)
+
+
+-- UC4 :- Ability to retrieve all the employee payroll data that is added to payroll service database
+
+mysql> SELECT * FROM employee_payroll;
++----+---------+------------+--------+
+| id | name    | start_date | salary |
++----+---------+------------+--------+
+|  1 | Ashwath | 2022-01-12 |   2000 |
+|  2 | Gouthum | 2022-01-12 |   3000 |
+|  3 | Anusha  | 2022-01-12 |   5000 |
++----+---------+------------+--------+
