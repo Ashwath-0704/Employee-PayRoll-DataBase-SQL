@@ -62,3 +62,23 @@ mysql> desc employee_payroll;
 | salary     | int         | YES  |     | NULL    |       |
 +------------+-------------+------+-----+---------+-------+
 4 rows in set (0.01 sec)
+
+
+--UC3 :- Ability to create employee payroll data in the payroll service database as part of CRUD Operation
+
+mysql> INSERT INTO employee_payroll (id,name,start_date,salary) values (1,'Ashwath','2022-1-12',2000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM employee_payroll;
++----+---------+------------+--------+
+| id | name    | start_date | salary |
++----+---------+------------+--------+
+|  1 | Ashwath | 2022-01-12 |   2000 |
++----+---------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO employee_payroll (id,name,start_date,salary) values(2,'Gouthum','2022-1-12',3000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee_payroll (id,name,start_date,salary) values(3,'Anusha','2022-1-12',5000);
+Query OK, 1 row affected (0.01 sec)
