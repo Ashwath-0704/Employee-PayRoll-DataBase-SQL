@@ -122,6 +122,18 @@ mysql> alter table employee_payroll add gender char(1) not null after name;
 Query OK, 0 rows affected (0.20 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
+mysql> DESC employee_payroll;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id         | int         | NO   | PRI | NULL    |       |
+| name       | varchar(20) | NO   |     | NULL    |       |
+| gender     | char(1)     | NO   |     | NULL    |       |
+| start_date | date        | YES  |     | NULL    |       |
+| salary     | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
 mysql> UPDATE employee_payroll
     -> set gender ='M' where name = 'Bill' or name ='Ashwath';
 Query OK, 1 row affected (0.01 sec)
@@ -166,3 +178,55 @@ mysql> SELECT * FROM employee_payroll;
 |  3 | Anusha  | F      | 2022-01-12 |   5000 |
 +----+---------+--------+------------+--------+
 3 rows in set (0.00 sec)
+
+-- UC7 :- Ability to find sum, average, min, max and number of male and female employees
+
+mysql> SELECT SUM(salary) FROM employee_payroll WHERE gender = 'M' GROUP BY gender;
++-------------+
+| SUM(salary) |
++-------------+
+|        5000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(id) FROM employee_payroll WHERE gender = 'M';
++-----------+
+| COUNT(id) |
++-----------+
+|         2 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(id) FROM employee_payroll WHERE gender = 'M' GROUP BY salary;
++-----------+
+| COUNT(id) |
++-----------+
+|         1 |
+|         1 |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT AVG(salary) FROM employee_payroll WHERE gender = 'M' GROUP BY id;
++-------------+
+| AVG(salary) |
++-------------+
+|   2000.0000 |
+|   3000.0000 |
++-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT MAX(salary) FROM employee_payroll WHERE gender = 'M' ;
++-------------+
+| MAX(salary) |
++-------------+
+|        3000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(gender) FROM employee_payroll WHERE gender = 'M' GROUP BY gender;
++---------------+
+| COUNT(gender) |
++---------------+
+|             2 |
++---------------+
+1 row in set (0.00 sec)
