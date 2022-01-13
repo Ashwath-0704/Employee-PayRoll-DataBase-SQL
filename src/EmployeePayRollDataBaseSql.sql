@@ -230,3 +230,17 @@ mysql> SELECT COUNT(gender) FROM employee_payroll WHERE gender = 'M' GROUP BY ge
 |             2 |
 +---------------+
 1 row in set (0.00 sec)
+
+-- UC8 :- Ability to extend employee_payroll data to store employee information like employee phone, address and department
+
+mysql> INSERT INTO employee_payroll
+    ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
+    ->        VALUES
+    ->        (4,'Ashwath_Naidu','90086xxxx','Near_Sai_baba_Temple_raod,Kundhanalli_Gate','Java_Developer',18000,2000,1000,2000,13000,'Bengaluru','India','M','2021-8-10',25000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee_payroll
+    ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
+    ->        VALUES
+    ->        (5,'Gouthum','808886xxxx','Near_Sai_baba_Temple_raod,Kundhanalli_Gate','Marketing Team',25000,5000,2000,3000,5000,'Bengaluru','India','M','2021-10-25',35000);
+Query OK, 1 row affected (0.01 sec)
