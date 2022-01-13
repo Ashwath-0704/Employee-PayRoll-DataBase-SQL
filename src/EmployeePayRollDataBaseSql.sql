@@ -233,7 +233,7 @@ mysql> SELECT COUNT(gender) FROM employee_payroll WHERE gender = 'M' GROUP BY ge
 
 -- UC8 :- Ability to extend employee_payroll data to store employee information like employee phone, address and department
 
--- UC9 :- Ability to extend employee_payroll table to have Basic Pay, Deductions, Taxable Pay, Income Tax, Net Pay.
+-- UC9 :- Ability to extend employee_payroll table to have Basic Pay, Deductions, Taxable Pay, Income Tax, Net Pay
 
 mysql> INSERT INTO employee_payroll
     ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
@@ -246,3 +246,31 @@ mysql> INSERT INTO employee_payroll
     ->        VALUES
     ->        (5,'Gouthum','808886xxxx','Near_Sai_baba_Temple_raod,Kundhanalli_Gate','Marketing Team',25000,5000,2000,3000,5000,'Bengaluru','India','M','2021-10-25',35000);
 Query OK, 1 row affected (0.01 sec)
+
+-- UC10 :- Ability to make Terissa as part of Sales and Marketing Department
+
+mysql> INSERT INTO employee_payroll
+    ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
+    ->        VALUES
+    ->        (6,'Terissa','808886xxxx','Near_RT Nager,Kundhanalli_Gate','Marketing Team',25000,5000,2000,3000,5000,'Bengaluru','India','M','2021-10-25',35000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee_payroll
+    ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
+    ->        VALUES
+    ->        (7,'Terissa','808886xxxx','Near_RT Nager,Kundhanalli_Gate','Sale Department',25000,5000,2000,3000,5000,'Bengaluru','India','M','2021-10-25',35000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>     SELECT * FROM employee_payroll;
++-------------+---------------+-------------+--------------------------------------------+-----------------+----------+------------+------------+------+--------+-----------+---------+--------+------------+--------+
+| Employee_ID | EmployeeName  | PhoneNumber | Address                                    | Department      | BasicPay | Deductions | TaxablePay | Tax  | NetPay | City      | Country | gender | start_date | salary |
++-------------+---------------+-------------+--------------------------------------------+-----------------+----------+------------+------------+------+--------+-----------+---------+--------+------------+--------+
+|           1 | Ashwath       | NULL        | NULL                                       | NULL            |     NULL |       NULL |       NULL | NULL |   NULL | NULL      | NULL    | M      | 2022-01-12 |   2000 |
+|           2 | Gouthum       | NULL        | NULL                                       | NULL            |     NULL |       NULL |       NULL | NULL |   NULL | NULL      | NULL    | M      | 2022-01-12 |   3000 |
+|           3 | Anusha        | NULL        | NULL                                       | NULL            |     NULL |       NULL |       NULL | NULL |   NULL | NULL      | NULL    | F      | 2022-01-12 |   5000 |
+|           4 | Ashwath_Naidu | 90086xxxx   | Near_Sai_baba_Temple_raod,Kundhanalli_Gate | Java_Developer  |    18000 |       2000 |       1000 | 2000 |  13000 | Bengaluru | India   | M      | 2021-08-10 |  25000 |
+|           5 | Gouthum       | 808886xxxx  | Near_Sai_baba_Temple_raod,Kundhanalli_Gate | Marketing Team  |    25000 |       5000 |       2000 | 3000 |   5000 | Bengaluru | India   | M      | 2021-10-25 |  35000 |
+|           6 | Terissa       | 808886xxxx  | Near_RT Nager,Kundhanalli_Gate             | Marketing Team  |    25000 |       5000 |       2000 | 3000 |   5000 | Bengaluru | India   | M      | 2021-10-25 |  35000 |
+|           7 | Terissa       | 808886xxxx  | Near_RT Nager,Kundhanalli_Gate             | Sale Department |    25000 |       5000 |       2000 | 3000 |   5000 | Bengaluru | India   | M      | 2021-10-25 |  35000 |
++-------------+---------------+-------------+--------------------------------------------+-----------------+----------+------------+------------+------+--------+-----------+---------+--------+------------+--------+
+7 rows in set (0.00 sec)
