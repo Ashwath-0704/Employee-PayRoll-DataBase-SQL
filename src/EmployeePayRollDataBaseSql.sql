@@ -247,7 +247,7 @@ mysql> INSERT INTO employee_payroll
     ->        (5,'Gouthum','808886xxxx','Near_Sai_baba_Temple_raod,Kundhanalli_Gate','Marketing Team',25000,5000,2000,3000,5000,'Bengaluru','India','M','2021-10-25',35000);
 Query OK, 1 row affected (0.01 sec)
 
--- UC10 :- Ability to make Terissa as part of Sales and Marketing Departments
+-- UC10 :- Ability to make Terissa as part of Sales and Marketing Departments.
 
 mysql> INSERT INTO employee_payroll
     ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
