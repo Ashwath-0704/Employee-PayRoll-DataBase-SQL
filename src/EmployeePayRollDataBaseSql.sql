@@ -114,4 +114,55 @@ mysql> SELECT * FROM employee_payroll WHERE start_date between CAST('2022-01-12'
 |  2 | Gouthum | 2022-01-12 |   3000 |
 |  3 | Anusha  | 2022-01-12 |   5000 |
 +----+---------+------------+--------+
-3 rows in set (0.00 sec).
+3 rows in set (0.00 sec)
+
+-- UC6 :- Ability to add Gender to Employee Payroll Table and Update the Rows to reflect the correct Employee Gender
+
+mysql> alter table employee_payroll add gender char(1) not null after name;
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE employee_payroll
+    -> set gender ='M' where name = 'Bill' or name ='Ashwath';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> DESC employee_payroll;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id         | int         | NO   | PRI | NULL    |       |
+| name       | varchar(20) | NO   |     | NULL    |       |
+| gender     | char(1)     | NO   |     | NULL    |       |
+| start_date | date        | YES  |     | NULL    |       |
+| salary     | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT * FROM employee_payroll;
++----+---------+--------+------------+--------+
+| id | name    | gender | start_date | salary |
++----+---------+--------+------------+--------+
+|  1 | Ashwath | M      | 2022-01-12 |   2000 |
+|  2 | Gouthum |        | 2022-01-12 |   3000 |
+|  3 | Anusha  |        | 2022-01-12 |   5000 |
++----+---------+--------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE employee_payroll set gender = 'M' WHERE name = 'Gouthum';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE employee_payroll set gender = 'F' WHERE name = 'Anusha';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM employee_payroll;
++----+---------+--------+------------+--------+
+| id | name    | gender | start_date | salary |
++----+---------+--------+------------+--------+
+|  1 | Ashwath | M      | 2022-01-12 |   2000 |
+|  2 | Gouthum | M      | 2022-01-12 |   3000 |
+|  3 | Anusha  | F      | 2022-01-12 |   5000 |
++----+---------+--------+------------+--------+
+3 rows in set (0.00 sec)
