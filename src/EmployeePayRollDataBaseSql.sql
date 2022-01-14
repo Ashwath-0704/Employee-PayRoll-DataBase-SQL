@@ -1,276 +1,126 @@
 
---UC1 :- Ability to create a payroll service database
+-- UC 10 :- Draw the ER Diagram for Payroll Service DB
 
-No connection. Trying to reconnect...
-Enter password: ***********
-Connection id:    15
-Current database: *** NONE ***
+-- UC11 :- Implement the ER Diagram into Payroll Service DB
 
-
-+--------------------+
-| Database           |
-+--------------------+
-| demo               |
-| information_schema |
-| mysql              |
-| performance_schema |
-| sakila             |
-| sys                |
-| world              |
-+--------------------+
-7 rows in set (14.00 sec)
-
-mysql> create database payrool_service;
-Query OK, 1 row affected (0.03 sec)
-
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| demo               |
-| information_schema |
-| mysql              |
-| payrool_service    |
-| performance_schema |
-| sakila             |
-| sys                |
-| world              |
-+--------------------+
-8 rows in set (0.00 sec)
-
-mysql> use payrool_service;
-Database changed
-mysql> show tables;
-Empty set (0.03 sec)
-
--- UC2 :- Ability to create a employee payroll table in the payroll service database to manage employee payrolls
-
-mysql>  create table employee_payroll
-    ->      (id int(10) primary key,
-    ->      name varchar(20) not null,
-    ->      start_date DATE,
-    ->      salary int);
-Query OK, 0 rows affected, 1 warning (0.10 sec)
-
-mysql> desc employee_payroll;
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| id         | int         | NO   | PRI | NULL    |       |
-| name       | varchar(20) | NO   |     | NULL    |       |
-| start_date | date        | YES  |     | NULL    |       |
-| salary     | int         | YES  |     | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
-4 rows in set (0.01 sec)
+CREATE TABLE  employee (Employee_ID int(10), EmployeeName varchar(255) NOT NULL, Date_Of_Brith varchar(20) NOT NULL, PRIMARY KEY(Employee_ID));
 
 
---UC3 :- Ability to create employee payroll data in the payroll service database as part of CRUD Operation
+mysql> INSERT INTO employee VALUES (1,'Ashwath Naidu','1997-10-04'),(2,'Gouthum G','1997-12-01'),(3,'Raja Reddy','1995-10-05'),(4,'Deepthi Reddy','1993-8-10');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+alter table employee add gender char(1) not null after EmployeeName;
+mysql> SELECT * FROM employee;
++-------------+---------------+--------+---------------+
+| Employee_ID | EmployeeName  | gender | Date_Of_Brith |
++-------------+---------------+--------+---------------+
+|           1 | Ashwath Naidu | M      | 1997-10-04    |
+|           2 | Gouthum G     | M      | 1997-12-01    |
+|           3 | Raja Reddy    | M      | 1995-10-05    |
+|           4 | Deepthi Reddy | F      | 1993-8-10     |
++-------------+---------------+--------+---------------+
+4 rows in set (0.00 sec)
 
-mysql> INSERT INTO employee_payroll (id,name,start_date,salary) values (1,'Ashwath','2022-1-12',2000);
-Query OK, 1 row affected (0.02 sec)
+CREATE TABLE  employee_Contacts (Employee_ID int(10), PhoneNumber varchar(200) NOT NULL, Address varchar(200) NOT NULL,foreign key (Employee_ID) references employee (Employee_ID));
 
-mysql> SELECT * FROM employee_payroll;
-+----+---------+------------+--------+
-| id | name    | start_date | salary |
-+----+---------+------------+--------+
-|  1 | Ashwath | 2022-01-12 |   2000 |
-+----+---------+------------+--------+
-1 row in set (0.00 sec)
+mysql> INSERT INTO employee_contacts VALUES (1,'9008622627','near sai baba tmeple road kudhanahalli gate'),(1,'852147963','nandhi halli near post office'),(1,'5647893211','BTM layout kudhanahalli gate'),
+    -> (2,'7415468222','KR Puram 4th stage'),
+    -> (3,'9632587536','RT nagar'),
+    -> (4,'9008622627','Whitefeild,near bus station');
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+mysql> desc employee_Contacts;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Employee_ID | int          | YES  | MUL | NULL    |       |
+| PhoneNumber | varchar(200) | NO   |     | NULL    |       |
+| Address     | varchar(200) | NO   |     | NULL    |       |
+| City        | varchar(50)  | NO   |     | NULL    |       |
+| State       | varchar(50)  | NO   |     | NULL    |       |
+| Country     | varchar(50)  | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
 
-mysql> INSERT INTO employee_payroll (id,name,start_date,salary) values(2,'Gouthum','2022-1-12',3000);
-Query OK, 1 row affected (0.01 sec)
 
-mysql> INSERT INTO employee_payroll (id,name,start_date,salary) values(3,'Anusha','2022-1-12',5000);
-Query OK, 1 row affected (0.01 sec)
+mysql> SELECT * FROM employee_Contacts;
++-------------+-------------+---------------------------------------------+-----------+-------------+---------+
+| Employee_ID | PhoneNumber | Address                                     | City      | State       | Country |
++-------------+-------------+---------------------------------------------+-----------+-------------+---------+
+|           1 | 9008622627  | near sai baba tmeple road kudhanahalli gate | Bengaluru | Karnataka   | India   |
+|           1 | 852147963   | nandhi halli near post office               | Bengaluru | Karnataka   | India   |
+|           1 | 5647893211  | BTM layout kudhanahalli gate                | Bengaluru | Karnataka   | India   |
+|           2 | 7415468222  | KR Puram 4th stage                          | Kurnool   | Telangana   | India   |
+|           3 | 9632587536  | RT nagar                                    | Mumbai    | Maharashtra | India   |
+|           4 | 9008622627  | Whitefeild,near bus station                 | Chennai   | Tamil Nadu  | India   |
++-------------+-------------+---------------------------------------------+-----------+-------------+---------+
+6 rows in set (0.00 sec)
 
+alter table employee_Contacts add City varchar(50) not null after Address;
 
--- UC4 :- Ability to retrieve all the employee payroll data that is added to payroll service database
+CREATE TABLE  employee_Department (Employee_ID int(10),Department varchar(255),foreign key (Employee_ID) references employee (Employee_ID));
 
-mysql> SELECT * FROM employee_payroll;
-+----+---------+------------+--------+
-| id | name    | start_date | salary |
-+----+---------+------------+--------+
-|  1 | Ashwath | 2022-01-12 |   2000 |
-|  2 | Gouthum | 2022-01-12 |   3000 |
-|  3 | Anusha  | 2022-01-12 |   5000 |
-+----+---------+------------+--------+
+mysql> desc employee_Department;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Employee_ID | int          | YES  | MUL | NULL    |       |
+| Department  | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
 
---UC5 :- Ability to retrieve salary data for a particular employee as well as all employees who have joined in a particular data range from the payroll service database
+mysql> INSERT INTO employee_Department VALUES (1,'Sales'),(1,'Marketting'),(2,'Sales'),(3,'HR'),(4,'CRM');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> SELECT salary FROM employee_payroll
-    -> WHERE name = 'Ashwath';
-+--------+
-| salary |
-+--------+
-|   2000 |
-+--------+
-1 row in set (0.00 sec)
-
-mysql> SELECT * FROM employee_payroll WHERE start_date between CAST('2022-01-12' as DATE) and DATE(NOW());
-+----+---------+------------+--------+
-| id | name    | start_date | salary |
-+----+---------+------------+--------+
-|  1 | Ashwath | 2022-01-12 |   2000 |
-|  2 | Gouthum | 2022-01-12 |   3000 |
-|  3 | Anusha  | 2022-01-12 |   5000 |
-+----+---------+------------+--------+
-3 rows in set (0.00 sec)
-
--- UC6 :- Ability to add Gender to Employee Payroll Table and Update the Rows to reflect the correct Employee Gender
-
-mysql> alter table employee_payroll add gender char(1) not null after name;
-Query OK, 0 rows affected (0.20 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> DESC employee_payroll;
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| id         | int         | NO   | PRI | NULL    |       |
-| name       | varchar(20) | NO   |     | NULL    |       |
-| gender     | char(1)     | NO   |     | NULL    |       |
-| start_date | date        | YES  |     | NULL    |       |
-| salary     | int         | YES  |     | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
+mysql> SELECT * FROM employee_Department;
++-------------+------------+
+| Employee_ID | Department |
++-------------+------------+
+|           1 | Sales      |
+|           1 | Marketting |
+|           2 | Sales      |
+|           3 | HR         |
+|           4 | CRM        |
++-------------+------------+
 5 rows in set (0.00 sec)
 
-mysql> UPDATE employee_payroll
-    -> set gender ='M' where name = 'Bill' or name ='Ashwath';
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+alter table employee_Department add Department_ID varchar(50) not null PRIMARY KEY after Employee_ID;
 
-mysql> DESC employee_payroll;
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| id         | int         | NO   | PRI | NULL    |       |
-| name       | varchar(20) | NO   |     | NULL    |       |
-| gender     | char(1)     | NO   |     | NULL    |       |
-| start_date | date        | YES  |     | NULL    |       |
-| salary     | int         | YES  |     | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
-5 rows in set (0.01 sec)
+CREATE TABLE  employee_Salary (Salary_ID int,Employee_ID int(10) not null,Basic_Pay float not null,Deducation float not null,Taxable_Pay float not null,Tax float not null,Net_Pay float not null, Salary int not null,PRIMARY KEY(Salary_ID),
+foreign key (Employee_ID) references employee (Employee_ID),foreign key (Employee_ID) references employee_Department(Employee_ID));
 
-mysql> SELECT * FROM employee_payroll;
-+----+---------+--------+------------+--------+
-| id | name    | gender | start_date | salary |
-+----+---------+--------+------------+--------+
-|  1 | Ashwath | M      | 2022-01-12 |   2000 |
-|  2 | Gouthum |        | 2022-01-12 |   3000 |
-|  3 | Anusha  |        | 2022-01-12 |   5000 |
-+----+---------+--------+------------+--------+
-3 rows in set (0.00 sec)
+mysql> CREATE TABLE  employee_Salary (Salary_ID int,Employee_ID int(10) not null,Basic_Pay float not null,Deducation float not null,Taxable_Pay float not null,Tax float not null,Net_Pay float not null, Salary int not null,PRIMARY KEY(Salary_ID),
+    -> foreign key (Employee_ID) references employee (Employee_ID),foreign key (Employee_ID) references employee_Department(Employee_ID));
+Query OK, 0 rows affected, 1 warning (0.18 sec)
 
-mysql> UPDATE employee_payroll set gender = 'M' WHERE name = 'Gouthum';
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+mysql> desc  employee_Salary ;
++-------------+-------+------+-----+---------+-------+
+| Field       | Type  | Null | Key | Default | Extra |
++-------------+-------+------+-----+---------+-------+
+| Salary_ID   | int   | NO   | PRI | NULL    |       |
+| Employee_ID | int   | NO   | MUL | NULL    |       |
+| Basic_Pay   | float | NO   |     | NULL    |       |
+| Deducation  | float | NO   |     | NULL    |       |
+| Taxable_Pay | float | NO   |     | NULL    |       |
+| Tax         | float | NO   |     | NULL    |       |
+| Net_Pay     | float | NO   |     | NULL    |       |
+| Salary      | int   | NO   |     | NULL    |       |
++-------------+-------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
 
-mysql> UPDATE employee_payroll set gender = 'F' WHERE name = 'Anusha';
-Query OK, 1 row affected (0.01 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+mysql> INSERT INTO  employee_Salary VALUES (1,1,5000,2500,1000,2000,3000,30000),(2,1,5000,1000,3000,500,8000,40000),
+    -> (3,2,4000,3000,2000,5500,2000,50050),(4,3,3500,200,5000,4500,6000,85600);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM employee_payroll;
-+----+---------+--------+------------+--------+
-| id | name    | gender | start_date | salary |
-+----+---------+--------+------------+--------+
-|  1 | Ashwath | M      | 2022-01-12 |   2000 |
-|  2 | Gouthum | M      | 2022-01-12 |   3000 |
-|  3 | Anusha  | F      | 2022-01-12 |   5000 |
-+----+---------+--------+------------+--------+
-3 rows in set (0.00 sec)
-
--- UC7 :- Ability to find sum, average, min, max and number of male and female employees
-
-mysql> SELECT SUM(salary) FROM employee_payroll WHERE gender = 'M' GROUP BY gender;
-+-------------+
-| SUM(salary) |
-+-------------+
-|        5000 |
-+-------------+
-1 row in set (0.00 sec)
-
-mysql> SELECT COUNT(id) FROM employee_payroll WHERE gender = 'M';
-+-----------+
-| COUNT(id) |
-+-----------+
-|         2 |
-+-----------+
-1 row in set (0.00 sec)
-
-mysql> SELECT COUNT(id) FROM employee_payroll WHERE gender = 'M' GROUP BY salary;
-+-----------+
-| COUNT(id) |
-+-----------+
-|         1 |
-|         1 |
-+-----------+
-2 rows in set (0.00 sec)
-
-mysql> SELECT AVG(salary) FROM employee_payroll WHERE gender = 'M' GROUP BY id;
-+-------------+
-| AVG(salary) |
-+-------------+
-|   2000.0000 |
-|   3000.0000 |
-+-------------+
-2 rows in set (0.00 sec)
-
-mysql> SELECT MAX(salary) FROM employee_payroll WHERE gender = 'M' ;
-+-------------+
-| MAX(salary) |
-+-------------+
-|        3000 |
-+-------------+
-1 row in set (0.00 sec)
-
-mysql> SELECT COUNT(gender) FROM employee_payroll WHERE gender = 'M' GROUP BY gender;
-+---------------+
-| COUNT(gender) |
-+---------------+
-|             2 |
-+---------------+
-1 row in set (0.00 sec)
-
--- UC8 :- Ability to extend employee_payroll data to store employee information like employee phone, address and department
-
--- UC9 :- Ability to extend employee_payroll table to have Basic Pay, Deductions, Taxable Pay, Income Tax, Net Pay
-
-mysql> INSERT INTO employee_payroll
-    ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
-    ->        VALUES
-    ->        (4,'Ashwath_Naidu','90086xxxx','Near_Sai_baba_Temple_raod,Kundhanalli_Gate','Java_Developer',18000,2000,1000,2000,13000,'Bengaluru','India','M','2021-8-10',25000);
-Query OK, 1 row affected (0.01 sec)
-
-mysql> INSERT INTO employee_payroll
-    ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
-    ->        VALUES
-    ->        (5,'Gouthum','808886xxxx','Near_Sai_baba_Temple_raod,Kundhanalli_Gate','Marketing Team',25000,5000,2000,3000,5000,'Bengaluru','India','M','2021-10-25',35000);
-Query OK, 1 row affected (0.01 sec)
-
--- UC10 :- Ability to make Terissa as part of Sales and Marketing Departments.
-
-mysql> INSERT INTO employee_payroll
-    ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
-    ->        VALUES
-    ->        (6,'Terissa','808886xxxx','Near_RT Nager,Kundhanalli_Gate','Marketing Team',25000,5000,2000,3000,5000,'Bengaluru','India','M','2021-10-25',35000);
-Query OK, 1 row affected (0.01 sec)
-
-mysql> INSERT INTO employee_payroll
-    ->        (Employee_ID,EmployeeName,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,Tax,NetPay,City,Country,gender,start_date,salary)
-    ->        VALUES
-    ->        (7,'Terissa','808886xxxx','Near_RT Nager,Kundhanalli_Gate','Sale Department',25000,5000,2000,3000,5000,'Bengaluru','India','M','2021-10-25',35000);
-Query OK, 1 row affected (0.01 sec)
-
-mysql>     SELECT * FROM employee_payroll;
-+-------------+---------------+-------------+--------------------------------------------+-----------------+----------+------------+------------+------+--------+-----------+---------+--------+------------+--------+
-| Employee_ID | EmployeeName  | PhoneNumber | Address                                    | Department      | BasicPay | Deductions | TaxablePay | Tax  | NetPay | City      | Country | gender | start_date | salary |
-+-------------+---------------+-------------+--------------------------------------------+-----------------+----------+------------+------------+------+--------+-----------+---------+--------+------------+--------+
-|           1 | Ashwath       | NULL        | NULL                                       | NULL            |     NULL |       NULL |       NULL | NULL |   NULL | NULL      | NULL    | M      | 2022-01-12 |   2000 |
-|           2 | Gouthum       | NULL        | NULL                                       | NULL            |     NULL |       NULL |       NULL | NULL |   NULL | NULL      | NULL    | M      | 2022-01-12 |   3000 |
-|           3 | Anusha        | NULL        | NULL                                       | NULL            |     NULL |       NULL |       NULL | NULL |   NULL | NULL      | NULL    | F      | 2022-01-12 |   5000 |
-|           4 | Ashwath_Naidu | 90086xxxx   | Near_Sai_baba_Temple_raod,Kundhanalli_Gate | Java_Developer  |    18000 |       2000 |       1000 | 2000 |  13000 | Bengaluru | India   | M      | 2021-08-10 |  25000 |
-|           5 | Gouthum       | 808886xxxx  | Near_Sai_baba_Temple_raod,Kundhanalli_Gate | Marketing Team  |    25000 |       5000 |       2000 | 3000 |   5000 | Bengaluru | India   | M      | 2021-10-25 |  35000 |
-|           6 | Terissa       | 808886xxxx  | Near_RT Nager,Kundhanalli_Gate             | Marketing Team  |    25000 |       5000 |       2000 | 3000 |   5000 | Bengaluru | India   | M      | 2021-10-25 |  35000 |
-|           7 | Terissa       | 808886xxxx  | Near_RT Nager,Kundhanalli_Gate             | Sale Department |    25000 |       5000 |       2000 | 3000 |   5000 | Bengaluru | India   | M      | 2021-10-25 |  35000 |
-+-------------+---------------+-------------+--------------------------------------------+-----------------+----------+------------+------------+------+--------+-----------+---------+--------+------------+--------+
-7 rows in set (0.00 sec)
+mysql> SELECT * FROM  employee_Salary ;
++-----------+-------------+-----------+------------+-------------+------+---------+--------+
+| Salary_ID | Employee_ID | Basic_Pay | Deducation | Taxable_Pay | Tax  | Net_Pay | Salary |
++-----------+-------------+-----------+------------+-------------+------+---------+--------+
+|         1 |           1 |      5000 |       2500 |        1000 | 2000 |    3000 |  30000 |
+|         2 |           1 |      5000 |       1000 |        3000 |  500 |    8000 |  40000 |
+|         3 |           2 |      4000 |       3000 |        2000 | 5500 |    2000 |  50050 |
+|         4 |           3 |      3500 |        200 |        5000 | 4500 |    6000 |  85600 |
++-----------+-------------+-----------+------------+-------------+------+---------+--------+
+4 rows in set (0.00 sec)
