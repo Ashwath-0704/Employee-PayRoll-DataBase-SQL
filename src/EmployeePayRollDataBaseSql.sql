@@ -124,3 +124,63 @@ mysql> SELECT * FROM  employee_Salary ;
 |         4 |           3 |      3500 |        200 |        5000 | 4500 |    6000 |  85600 |
 +-----------+-------------+-----------+------------+-------------+------+---------+--------+
 4 rows in set (0.00 sec)
+
+-- UC12 :- Ensure all retrieve queries done especially in UC 4, UC 5 and UC 7 are working with new table structure
+
+mysql> SELECT salary FROM employee_Salary WHERE  Employee_ID=1;
++--------+
+| salary |
++--------+
+|  30000 |
+|  40000 |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT SUM(salary) FROM employee_Salary WHERE  Employee_ID=1 GROUP BY  Salary_ID;
++-------------+
+| SUM(salary) |
++-------------+
+|       30000 |
+|       40000 |
++-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT SUM(salary) FROM employee_Salary WHERE  Employee_ID=1;
++-------------+
+| SUM(salary) |
++-------------+
+|       70000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(salary) FROM employee_Salary;
++-------------+
+| AVG(salary) |
++-------------+
+|  51412.5000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(salary) FROM employee_Salary;
++-------------+
+| MIN(salary) |
++-------------+
+|       30000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(salary) FROM employee_Salary;
++-------------+
+| MAX(salary) |
++-------------+
+|       85600 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(salary) FROM employee_Salary;
++---------------+
+| COUNT(salary) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
