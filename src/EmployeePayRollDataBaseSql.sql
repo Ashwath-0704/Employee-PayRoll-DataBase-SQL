@@ -20,7 +20,7 @@ mysql> SELECT * FROM employee;
 |           4 | Deepthi Reddy | F      | 1993-8-10     |
 +-------------+---------------+--------+---------------+
 4 rows in set (0.00 sec)
-
+.
 CREATE TABLE  employee_Contacts (Employee_ID int(10), PhoneNumber varchar(200) NOT NULL, Address varchar(200) NOT NULL,foreign key (Employee_ID) references employee (Employee_ID));
 
 mysql> INSERT INTO employee_contacts VALUES (1,'9008622627','near sai baba tmeple road kudhanahalli gate'),(1,'852147963','nandhi halli near post office'),(1,'5647893211','BTM layout kudhanahalli gate'),
